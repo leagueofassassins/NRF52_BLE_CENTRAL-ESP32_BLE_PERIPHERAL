@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    ble_nrf_esp.c
-  * @author  leagueofassaissins
+  * @author  leagueofassassins
   * @brief   nrf ble central device implementation as a GATT client.
   ******************************************************************************
   */
