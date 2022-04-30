@@ -247,6 +247,38 @@ static const esp_gatts_attr_db_t ble_gatt_db[IDX_NB] =
 
 };
 
+/**
+ * ***************************************************************************************
+ * @brief converts decimal value to hex
+ * @param decimal number(0 to 255)
+ * @retval equivalent hex value(0x00 to 0xFF) 
+ *****************************************************************************************
+ */
+uint8_t convert_dec_to_hex(uint8_t dec_data){
+    uint8_t first_digit;
+    uint8_t second_digit;
+
+
+    first_digit = (dec_data/16);
+    if(first_digit<10){
+        first_digit = first_digit + 48;
+    }
+    else{
+        first_digit = first_digit + 55;
+    }
+
+    second_digit = (dec_data%16);
+    if(second_digit<10){
+       second_digit = second_digit + 48;
+    }
+    else{
+        first_digit = second_digit + 55;
+    } 
+
+    return ((second_digit<<8) | first_digit);
+
+}
+
 
 static char *esp_key_type_to_str(esp_ble_key_type_t key_type)
 {
@@ -810,11 +842,11 @@ void LIS2DW12_Data(void *arg){
         if(cccd_flag[0] == 0x0001){
             ESP_LOGI(TAG,"notify enabled");
 
-            /*get axes value(mg)*/
+            /*get axes value*/
             float x_axes_value = get_x_axes_data();
             sprintf(notify_data[0],"%f",x_axes_value);
     
-            ESP_LOGI(TAG,"x(mg):%f",x_axes_value);
+            ESP_LOGI(TAG,"x_axes:%f",x_axes_value);
 
             
 
@@ -828,11 +860,11 @@ void LIS2DW12_Data(void *arg){
         /*Y-axis notification handle*/
         if(cccd_flag[1] == 0x0001){
          
-            /*get axes value(mg)*/
+            /*get axes value*/
             float y_axes_value = get_y_axes_data();
             sprintf(notify_data[1],"%f",y_axes_value);
     
-            ESP_LOGI(TAG,"y(mg):%f",y_axes_value);   
+            ESP_LOGI(TAG,"y_axes:%f",y_axes_value);   
 
             ack = esp_ble_gatts_send_indicate(profile_tab[PROFILE_A_APP_ID].gatts_if,conn_id,ble_peripheral_nrf[IDX_CHAR_VAL_B],sizeof(notify_data[1]),(uint8_t*)notify_data[1],false);
             if(ack==0){
@@ -845,11 +877,11 @@ void LIS2DW12_Data(void *arg){
         /*Z-axis notification handle*/
         if(cccd_flag[2] == 0x0001){
          
-            /*get axes value(mg)*/
+            /*get axes value*/
             float z_axes_value = get_z_axes_data();
             sprintf(notify_data[2],"%f",z_axes_value);
     
-            ESP_LOGI(TAG,"z(mg):%f",z_axes_value);   
+            ESP_LOGI(TAG,"z_axes:%f",z_axes_value);   
 
             ack = esp_ble_gatts_send_indicate(profile_tab[PROFILE_A_APP_ID].gatts_if,conn_id,ble_peripheral_nrf[IDX_CHAR_VAL_C],sizeof(notify_data[2]),(uint8_t*)notify_data[2],false);
             if(ack==0){
