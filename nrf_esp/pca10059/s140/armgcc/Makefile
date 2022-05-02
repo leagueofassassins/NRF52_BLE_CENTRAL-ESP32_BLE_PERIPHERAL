@@ -2,7 +2,7 @@ PROJECT_NAME     := nrf_esp
 TARGETS          := nrf52840_xxaa
 OUTPUT_DIRECTORY := _build
 
-SDK_ROOT := /mnt/c/Users/rutvi/OneDrive/Desktop/DeviceDownload/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/
+SDK_ROOT := path-to-sdk/nRF5_SDK_17.1.0_ddde560/nRF5_SDK_17.1.0_ddde560/
 PROJ_DIR := ../../..
 
 $(OUTPUT_DIRECTORY)/nrf52840_xxaa.out: \
