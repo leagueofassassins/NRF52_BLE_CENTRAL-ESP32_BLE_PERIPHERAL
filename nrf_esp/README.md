@@ -2,6 +2,7 @@
 -> To build project go to "nrf_esp/pca10059/s140/armgcc" and run make all command.<br />
 -> hex file of the project will be generated in "nrf_esp/pca10059/s140/armgcc/_build/" folder.<br />
 -> Flash Both .hex named s140_nrf52_7.2.0_softdevice.hex and nrf52840_xxaa.hex<br />
+-> add the path of your nrfsdk in makefile which is stored at path "nrf_esp/pca10059/s140/armgcc/"<br />
 
 Hardware Required:<br />
 
